@@ -14,3 +14,5 @@
 
 * What is a merge conflict?
 ** A merge conflict is when there are two or more merges where the same file or lines of code have been edited, added, or deleted by more than one branch.  This can happen if there are two or more programmers working on the same section of code or even the same file.
+
+*Here is some extra code for Release 2
