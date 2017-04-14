@@ -1,0 +1,23 @@
+* {
+  font-family: Arial, sans;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: orange;
+}
+
+blockquote {
+  padding: 25px;
+  border: 1px black solid;
+  border-top: 15px gray solid;  
+  width: 200px;
+  height: 200px;
+  margin: 5px;
+  float: left;
+}
+
+cite {
+  display: block;
+  font-weight: bold;
+  margin-top: 10px;
+}
