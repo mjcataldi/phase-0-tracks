@@ -76,22 +76,30 @@ def VampireChecker()
   # puts "Is Health Insurance Pass: #{healthInsurancePass}"
   # puts "Has Sun Allergy: #{hasSunAllergy}"
   
-  if isYearPass 
-    if garlicBreadPass
-      if healthInsurancePass
-        if !hasSunAllergy
-          puts "#{name} is probably not a vampire"
-        else
-          puts "#{name} might be a vampire"
-        end
-      else
-        puts "#{name} could very well be a vampire"
-      end
-    else
-      puts "#{name} is most definitely a vampire"
-    end
+  # if isYearPass 
+  #   if garlicBreadPass
+  #     if healthInsurancePass
+  #       if !hasSunAllergy
+  #         puts "#{name} is probably not a vampire"
+  #       else
+  #         puts "#{name} might be a vampire"
+  #       end
+  #     else
+  #       puts "#{name} could very well be a vampire"
+  #     end
+  #   else
+  #     puts "#{name} is most definitely a vampire"
+  #   end
+  # else
+  #   puts "#{name} almost certainly a vampire"
+  # end
+  
+  if isYearPass && garlicBreadPass && healthInsurancePass && !hasSunAllergy
+    puts "#{name} is probably not a vampire"
+  elsif (isYearPass || garlicBreadPass || healthInsurancePass || !hasSunAllergy) == false
+    puts "Dude, #{name} is almost certainly a vampire.  Wear a sweater turtleneck!"
   else
-    puts "#{name} almost certainly a vampire"
+    puts "Suspicious, this #{name} person might be a vampire.  Be safe and don't go out clubbing!"
   end
   
 end
@@ -112,7 +120,6 @@ def AskNumberEmployees()
   end
   
   puts "Actually, never mind! What do these questions have to do with anything? Let's all be friends."
-  
 end
 
 AskNumberEmployees()
