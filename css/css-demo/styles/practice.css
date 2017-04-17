@@ -35,6 +35,8 @@ h2+p > span {
   font-family: Tahoma;
   text-decoration: underline;
 }
+
+
 /*This is an example of reaching a sibiling element.  Release 2 Question 3.*/
 
 /*Cascading refers to working from the general to the specific.  For example, using tag identifiers ('div') to classes ('div.myClass') to Ids ('div#myId') and combinations of them.  The more specific the higher the priority.
