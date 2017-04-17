@@ -42,19 +42,58 @@ def VampireChecker()
     healthInsurancePass = false
   end
   
+  
+  #Allergy Section
+  puts "Do you have any allergies (Y/N)?"
+  hasAllergies = gets.strip.downcase
+  hasSunAllergy = false
+  
+  if hasAllergies == "y" || hasAllergies == "yes" || hasAllergies == "yup"
+    done = false
+    
+    while !done
+      puts "Name something you are allergic to:"
+      allergen = gets.strip.downcase
+      
+      if allergen == "sunshine" || allergen == "sunlight" || allergen == "sun"
+        hasSunAllergy = true
+        done = true
+      end
+      
+      puts "Do you have another allergy (Y/N/Done)?"
+      anotherAllergy = gets.strip.downcase
+      
+      if anotherAllergy == "y" || anotherAllergy == "yes" || anotherAllergy == "yup"
+        done = false
+      else
+        done = true
+      end
+    end
+  end
+  
+  # puts "Is Year Pass: #{isYearPass}"
+  # puts "Is Garlice Bread Pass: #{garlicBreadPass}"
+  # puts "Is Health Insurance Pass: #{healthInsurancePass}"
+  # puts "Has Sun Allergy: #{hasSunAllergy}"
+  
   if isYearPass 
     if garlicBreadPass
       if healthInsurancePass
-        puts "#{name} is probably not a vampire"
-      elsif
-        puts "#{name} could be a vampire"
+        if !hasSunAllergy
+          puts "#{name} is probably not a vampire"
+        else
+          puts "#{name} might be a vampire"
+        end
+      else
+        puts "#{name} could very well be a vampire"
       end
-    elsif
-      puts "#{name} could very well be a vampire"
+    else
+      puts "#{name} is most definitely a vampire"
     end
-  elsif
+  else
     puts "#{name} almost certainly a vampire"
   end
+  
 end
 
 def AskNumberEmployees()
@@ -62,10 +101,17 @@ def AskNumberEmployees()
   number_of_candidates = gets.strip.to_i
   counter = 0
   
-  while number_of_candidates != counter do
+  # while number_of_candidates != counter
+  #   VampireChecker()
+  #   counter += 1
+  # end
+  
+  until number_of_candidates == counter
     VampireChecker()
     counter += 1
   end
+  
+  puts "Actually, never mind! What do these questions have to do with anything? Let's all be friends."
   
 end
 
