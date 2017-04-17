@@ -31,6 +31,12 @@ ul.accomplishments > li {
   font-size: 1.2em;
 }
 
+h2+p > span {
+  font-family: Tahoma;
+  text-decoration: underline;
+}
+/*This is an example of reaching a sibiling element.  Release 2 Question 3.*/
+
 /*Cascading refers to working from the general to the specific.  For example, using tag identifiers ('div') to classes ('div.myClass') to Ids ('div#myId') and combinations of them.  The more specific the higher the priority.
   
   If there's a conflict between two elements, the browser first determines weight of the style based on where it is.  With sheets, external sheets are the lowest priority, internal styles are more than external and inline are the highest priority.  Within this, normal tags are considered lowest priority, classes are higher than tags, and ids are higher than classes.
