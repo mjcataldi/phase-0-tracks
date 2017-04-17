@@ -57,4 +57,20 @@ def VampireChecker()
   end
 end
 
-VampireChecker()
+def AskNumberEmployees()
+  puts "How many employees will we be interviewing today?"
+  number_of_candidates = gets.strip.to_i
+  counter = 0
+  
+  # until number_of_candidates == counter do
+  #   VampireChecker()
+  #   counter++
+  # end
+  
+  while number_of_candidates != counter do
+    VampireChecker()
+    counter++
+  end
+end
+
+AskNumberEmployees()
