@@ -62,15 +62,11 @@ def AskNumberEmployees()
   number_of_candidates = gets.strip.to_i
   counter = 0
   
-  # until number_of_candidates == counter do
-  #   VampireChecker()
-  #   counter++
-  # end
-  
   while number_of_candidates != counter do
     VampireChecker()
-    counter++
+    counter += 1
   end
+  
 end
 
 AskNumberEmployees()
