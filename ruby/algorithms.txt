@@ -1,0 +1,27 @@
+Algorithm for Elevator
+1. Enter into elevator.
+2. Turn 180 degrees.
+3. Move to panel
+4. Move arm up to panel
+5. Match requested floor with number button on panel
+6. Move arm to button
+7. Press button until lit.
+   If not lit, try again 2 times until lit
+   If not lit after 3 times, ask owner for directions
+
+
+HUMAN OPENING DOOR (PULL TO OPEN ONLY)
+1. Navigate towards door and stop from 6-12 inches in front of center
+2. Reach out with primary hand to touch door with palm of hand
+3. Close hand with some lbs of weight
+4. Pull gently
+5. Twist clockwise until door opens
+6. Swing door open body width plus 50%.  If cannot swing that much, minimum must be body depth.
+7. Move feet to walk through door
+
+CLOSE DOOR (PULL TO CLOSE ONLY)
+1. Navigate towards door and stop from 12-18 inches in front of center
+2. Reach out with primary hand to touch door with palm of hand
+3. Close hand with some lbs of weight
+4. Pull door gently to frame until door is closed and latch secures door in place
+5. Turn around and proceed on day.
