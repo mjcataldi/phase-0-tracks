@@ -1,10 +1,15 @@
+* {
+  color: black;
+  margin: 0px;
+}
+
 #contact-info {
   font-size: .8em;
 }
 
 .job {
   background-color: #e9e5dc;
-  border-radius: 5px;
+  border-radius: 10px;
   padding: 10px 0px;
   margin: 15px;
 }
@@ -13,3 +18,24 @@
   font-size: .8em;
   border: 1px black dotted;
 }
+
+h3:hover {
+  text-shadow: 3px 3px gray;
+}
+
+ul.accomplishments > li {
+  text-decoration: underline;
+}
+
+#gp {
+  font-size: 1.2em;
+}
+
+/*Cascading refers to working from the general to the specific.  For example, using tag identifiers ('div') to classes ('div.myClass') to Ids ('div#myId') and combinations of them.  The more specific the higher the priority.
+  
+  If there's a conflict between two elements, the browser first determines weight of the style based on where it is.  With sheets, external sheets are the lowest priority, internal styles are more than external and inline are the highest priority.  Within this, normal tags are considered lowest priority, classes are higher than tags, and ids are higher than classes.
+  
+  If two rules are the same weight and located in the same area (e.g. external css to external css), then the rule that is specified last will get priority.
+  
+  See website for more information: http://specificity.keegan.st/
+*/
