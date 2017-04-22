@@ -1,3 +1,56 @@
 * {
-  /*font-family: Tahoma;*/
+  font-family: Arial, sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  text-transform: uppercase ;
+}
+
+header {
+  display: block;
+  position: relative;
+}
+
+header::after {
+  content: "";
+  background: url('images/octopus.jpg');
+  opacity: 0.5;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  position: absolute;
+  z-index: -1;   
+}
+
+.column-1 {
+  display: inline;
+  float: left;
+  width: 45%;
+}
+
+.column-2 {
+  display: inline;
+  width: 45%;
+}
+
+#columnsPart {
+  /*column-count: 2;*/
+  /*column-gap: 17px;*/
+  /*column-rule: 2px rgba(0, 0, 0, .3) solid;*/
+}
+
+code {
+  font-family: monospace;
+  list-style-image: none;
+}
+
+details p {
+  font-style: italic;
+  font-size: 75%;
+  text-indent: 15px;
+}
+
+footer {
+  text-align: center;
 }
