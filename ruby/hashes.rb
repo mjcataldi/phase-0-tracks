@@ -1,47 +1,35 @@
 #Interior Designer
 
-class Client
+class Client 
+  # < ActiveSupport::CoreExtensions::String::Inflections
   # This is the Client class.  It stores accesible properties about the client and has two methods: the initial questionaire and the edit answers.  Edit can be accessed on it's own, but is also accessed from the initial questionaire. 
   
-  # attr_accessor :client_name, :client_age, :client_children, 
-  #               :client_decor, :client_rush,
-  #               :client_info
-
-  def initialize
-    @@count += 1
-  end
   
-  def self.count
-    @@count
-  end
+  attr_accessor :client_name, :client_age, :client_kids, 
+                :client_decor, :client_rush,
+                :client_info
+  # attr_reader   :client_weight
+  # attr_writer   :client_password
+
+  # def initialize
+  #   @@count += 1
+  # end
+  
+  # def self.count
+  #   @@count
+  # end
   
   # def initialize(client_name)
   #   @client_name = client_name
   # end
   
-  def client_name
-    @client_name = client_name
-  end
+  # def client_name= (client_name)
+  #   @client_name = client_name
+  # end
   
-  def client_age
-    @client_age = client_age
-  end
-  
-  def client_children
-    @client_children = client_children
-  end
-
-  def client_decor
-    @client_decor = client_decor
-  end
-  
-  def client_rush
-    @client_rush = client_rush
-  end
-  
-  def client_info
-    @client_info
-  end
+  # def client_name
+  #   @client_name = client_name
+  # end
 
   def clientQuestionaire
     # CLIENT INFORMATION
@@ -57,7 +45,7 @@ class Client
     puts "What is the client's age?"
     @client_age = gets.strip.to_i
     
-    puts "How many children does the client have?"
+    puts "How many kids does the client have?"
     @client_children = gets.strip.to_i
     
     puts "What is the client's decor theme?"
@@ -69,7 +57,7 @@ class Client
     @client_info = {
       :client_name => @client_name,
       :client_age => @client_age,
-      :client_children => @client_children,
+      :client_kids => @client_children,
       :client_decor => @client_decor,
       :client_rush => @client_rush
     }
@@ -95,10 +83,12 @@ class Client
     #   label :repeat
     
     while !answered
-      puts "Which part would you like to edit ('Name', 'Age', 'Children', 'Decor', 'Rush')?"
+      puts "Which part would you like to edit ('Name', 'Age', 'Kids', 'Decor', 'Rush')?"
       client_key = gets.strip.downcase
+
+      # Can use the parameterize and underscore in rails, to_sym works in in repl.it but not in Cloud9.  Use .intern method to convert string to symbol.
       
-      puts "The current value of #{client_key.capitalize} is #{@client_info[client_key]}.  What do you wish to change it to?"
+      puts "The current value of #{client_key.capitalize} is #{@client_info[("client_" + client_key).intern]}.  What do you wish to change it to?"
       client_value = gets.strip
       
       case client_key
@@ -108,8 +98,8 @@ class Client
         when "age"
           @client_info[:client_age] = client_value.to_i
           answered = true
-        when "children"
-          @client_info[:client_children] = client_value.to_i
+        when "kids"
+          @client_info[:client_kids] = client_value.to_i
           answered = true
         when "decor"
           @client_info[:client_decor] = client_value.capitalize
