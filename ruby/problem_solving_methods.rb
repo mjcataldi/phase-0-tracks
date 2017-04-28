@@ -37,7 +37,7 @@
 
 
 # BUBBLE SORT - ORDERS A NUMBER ARRAY
-def bubble_sort(array)
+def bubble_sort_numbers(array)
   array.any? { |x| 
     if !x.is_a? Numeric
       abort "Not all values are numbers.  That's a bummer dude :-(."
