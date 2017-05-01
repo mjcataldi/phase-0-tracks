@@ -189,7 +189,5 @@ end
 # for Hashes.
 
 def remove_animal(animal, hashed_list)
-  
-  
-  
+  hashed_list.delete(animal)
 end
