@@ -177,7 +177,6 @@ def check_if_endangered(check_animal, hashed_list)
   else
     puts "The #{check_animal.strip.capitalize} is not on the list of extinct animals."
   end
-  
 end
 # check_if_endangered("Andean Cat", extinct_animals)
 # check_if_endangered("Dodo", extinct_animals)
@@ -189,5 +188,7 @@ end
 # for Hashes.
 
 def remove_animal(animal, hashed_list)
+  puts "Removing #{hashed_list[animal]} who was supposedly extinct in #{hashed_list[] }"
   hashed_list.delete(animal)
 end
+remove_animal("Passenger Pigeon", extinct_animals)
