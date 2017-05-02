@@ -1,12 +1,10 @@
 class Puppy
   attr_accessor :name, :type, :age, :friendly
+  @@count = 0
   
-  # def initialize(name, type, age, friendly)
-  #   @name = name
-  #   @type = type
-  #   @age = age
-  #   @friendly = friendly
-  # end
+  def initialize
+    @@count += 1
+  end
   
   def Bark
     if @name.length != 0
@@ -24,13 +22,22 @@ class Puppy
     end
   end
   
-  def self.Count
-    @@count += 1
+  def self.count
+    @@count
   end
 
 end
 
 fido = Puppy.new
 fido.name = "Fido"
+
+dodo = Puppy.new
+dodo.name = "Dodo"
+
+bojangles = Puppy.new
+bojangles.name = "Mr. Bo Jangles"
+
 fido.Sleep
 fido.Bark
+
+puts "There are currently #{Puppy.count} puppy/puppies that have been created.  Woof woof!"
