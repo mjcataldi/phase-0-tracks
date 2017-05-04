@@ -86,5 +86,7 @@ def make_and_store_people
 end
 
 make_and_store_people.each do |person|
+  person.introduction
   person.laugh
+  person.sleep
 end
