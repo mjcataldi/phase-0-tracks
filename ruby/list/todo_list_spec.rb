@@ -1,3 +1,7 @@
+require_relative 'todo_list'
+require 'rspec'
+# require 'debugger'
+
 describe TodoList do
   let(:list) { TodoList.new(["do the dishes", "mow the lawn"]) }
 
