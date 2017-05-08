@@ -7,22 +7,31 @@ class GuessWord
     @word_array = word_array
   end
   
-  # @name
-  # def name= name
-  #   @name = name
-  # end
-  
-  # def name
-  #   @name
-  # end
+  # Hey guys, having a hard time figuring out what kind of method to use here.  It seems that there's only sub portions that can be machine based.  Have tried my best!
 
+  def result_so_far(letter_attempts_array, word_to_guess)
+      puts ""
+      puts "Here is what you have so far: "
+      clue_word = ""
+      word_to_guess.split('').each { |letter| 
+
+        if letter_attempts_array.include?(letter)
+          clue_word += "#{letter} "
+        else
+          clue_word += "_ "
+        end
+      }
+      puts clue_word
+      puts ""
+  end
 
   def guess_word_user()
     number_of_tries_attempted = 0
     number_of_tries = 8
     separator = "----------------------"
     
-    word_to_guess = @word_array[rand(@word_array.length) + 1].downcase
+    word_to_guess = @word_array[rand(@word_array.length) + 1]
+    word_to_guess.downcase!
     
     word_attempts_array = []
     letter_attempts_array = []
@@ -84,9 +93,13 @@ class GuessWord
       puts clue_word
       puts ""
       
+      # result_so_far(letter_attempts_array, word_to_guess)
+      
       guessed_letters = ""
       letter_attempts_array.each { |letter| guessed_letters += "#{letter} " }
-      guessed_words = word_attempts_array.each { |word| p "#{word} " }
+      guessed_words = ""
+      word_attempts_array.each { |word| guessed_words += "#{word} " }
+      
       puts "Guessed letters: #{guessed_letters}"
       puts "Guessed words: #{guessed_words}"
     end
