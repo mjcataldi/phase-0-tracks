@@ -1,24 +1,28 @@
 # Create a class that can handle properties and methods for a word guessing game. 
 # Pre-populate the game with an array of words
 class GuessWord
-  attr_writer :@word_array
+  attr_accessor :word_array
   
-  def initialize(array_of_words)
-    @word_array = array_of_words
+  def initialize(word_array)
+    @word_array = word_array
   end
   
   # @name
   # def name= name
   #   @name = name
   # end
+  
+  # def name
+  #   @name
+  # end
 
 
-  def guess_word_user(word_array)
+  def guess_word_user()
     number_of_tries_attempted = 0
     number_of_tries = 8
     separator = "----------------------"
     
-    @word_to_guess = word_array[rand(word_array.length) + 1].downcase
+    word_to_guess = @word_array[rand(@word_array.length) + 1].downcase
     
     word_attempts_array = []
     letter_attempts_array = []
@@ -90,5 +94,5 @@ class GuessWord
   end
 end
 
-new_game = GuessWord.new
-new_game.guess_word_user(["paper", "clipboard", "coaster", "mouse", "keyboard", "lamp", "computer", "browser"])
+new_game = GuessWord.new(["paper", "clipboard", "coaster", "mouse", "keyboard", "lamp", "computer", "browser"])
+new_game.guess_word_user()
