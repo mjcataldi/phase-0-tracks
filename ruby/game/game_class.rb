@@ -94,10 +94,12 @@ class GuessWord
     
     if words_string.length == 0
       words_array = @word_array
+      words_array.each { |word| words_string += "#{word} "}
+      words_string.strip!
     else
       words_string.split(',').each { |word| words_array << word.strip }
     end
-    word_to_guess = words_array[rand(@words_array.length + 1)]
+    word_to_guess = words_array[rand(words_array.length + 1)]
     puts ""
 
 
