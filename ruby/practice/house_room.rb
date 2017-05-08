@@ -15,8 +15,9 @@ class Room
     total = 0
     @items.each do |item| 
       total += item.price
+      puts "This #{item.name} is worth #{item.price}."
     end
-    return "The total dollar amount for all items in this room is #{total}."
+    puts "The total dollar amount for all items in this room is #{total}."
   end
 
   def to_s
@@ -30,3 +31,5 @@ puts "#{living_room.total_value}"
 
 cardboard_box = Item.new("Cardboard Box", "Brown", 5)
 piano = Item.new("Piano", "Black", 10000)
+
+living_room.total_value
