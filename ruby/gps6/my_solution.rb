@@ -1,7 +1,7 @@
 # Virus Predictor
 
-# I worked on this challenge [by myself, with: ].
-# We spent [#] hours on this challenge.
+# I worked on this challenge [by myself, with: Daniel].
+# We spent [2] hours on this challenge.
 
 # EXPLANATION OF require_relative
 # require_relative is a way that the source file requires another file in the same or relative directory to its own location.  This works simliar to an href attribute in an anchor tag minus the #id type.  It's a shorthand way to reference a file counter to require which needs the full absolute path of a file.
@@ -109,3 +109,11 @@ STATE_DATA.each { |state_name, state_values|
 # myVirusPredictor.virus_effects
 #=======================================================================
 # Reflection Section
+
+# 1. The differences between the two different hash syntaxes shown in the state_data file are two fold: one is a "string" =>, the other is a :symbol => "value" or symbol: value.  The strings are good when the user needs to use them in the code directly.  Symbols are good because they only point to one location in the memory instead of having to create a new location for each key compared to a string.
+# 2. EXPLANATION OF require_relative
+# require_relative is a way that the source file requires another file in the same or relative directory to its own location.  This works simliar to an href attribute in an anchor tag minus the #id type.  It's a shorthand way to reference a file counter to require which needs the full absolute path of a file.
+# require can handle any path, but is most typically used to reference files that are outside of the root folder scope of the referencing file.  Needs a full absolute path compared to require_relative.
+# 3. Some ways to iterate through a has are a while loop, a do loop, or an each iterator.
+# 4. One of the things that stood out amongst the variables were that they were consistent and used the same data from the constant hash, so with commenting out 5 lines of code, the two methods could be easily combined.
+# 5. The concept I most solidified in this challenge (aside from more understanding the differences between print, p and puts) is refactoring and using vector formulas to categorize data which make them more accurate.
