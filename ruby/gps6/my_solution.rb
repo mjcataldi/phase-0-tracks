@@ -105,7 +105,7 @@ STATE_DATA.each { |state_name, state_values|
   state_instance.virus_effects
 }
   
-myVirusPredictor = VirusPredictor.new("Illinois", 231.9, 12875255)
-myVirusPredictor.virus_effects
+# myVirusPredictor = VirusPredictor.new("Illinois", 231.9, 12875255)
+# myVirusPredictor.virus_effects
 #=======================================================================
 # Reflection Section
