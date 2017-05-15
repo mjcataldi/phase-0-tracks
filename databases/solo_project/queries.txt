@@ -16,6 +16,6 @@ delete from emails e where e.email = "mcataloe@gmail.com"
 RELEASE 3
 select c.first_name, c.last_name, e.email
 from contacts c left join emails e on c.id = e.contactID
-where e.contact_id is null;
+where e.contactID is null;
 
 
