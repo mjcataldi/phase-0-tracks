@@ -2,20 +2,20 @@
 select * from contacts;
 
 **Question 2
-update emails set email = "matt@renovostrings.org" where contact_id = 1;
+update emails set email = "matt@renovostrings.org" where contactID = 1;
 
 **Question 3
-select * from contacts c inner join emails e on c.id = e.contact_id;
+select * from contacts c inner join emails e on c.id = e.contactID;
 
 **Question 4
-select c.first_name, c.last_name, e.emails from contacts c inner join emails e on c.id = e.contact_id where e.is_primary = 1;
+select c.first_name, c.last_name, e.emails from contacts c inner join emails e on c.id = e.contactID where e.is_primary = 1;
 
 **Question 5
 delete from emails e where e.email = "mcataloe@gmail.com"
 
 RELEASE 3
 select c.first_name, c.last_name, e.email
-from contacts c left join emails e on c.id = e.contact_id
+from contacts c left join emails e on c.id = e.contactID
 where e.contact_id is null;
 
 
