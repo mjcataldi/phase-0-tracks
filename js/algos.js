@@ -1,10 +1,9 @@
+// RELEASE 0
 // Create function that find's longest phrase
 // Argument of an array
 // loop through each one and see about longest one
 // create condition where if phrase is longest, saves the ordinal value in a number variable
 // return value based on ordinal value
-
-// RELEASE 0
 function findLongestPhrase(phrase_array) {
   var position = 0;
   var max_length = 0;
@@ -15,36 +14,35 @@ function findLongestPhrase(phrase_array) {
       position = i;
     }
   }
-
   return phrase_array[position];
 }
-
 // var my_array = ["First Phrase", "Second Phrase", "Third Phrase"];
 // console.log("The longest phrase in my_array is '" + findLongestPhrase(my_array) + "'");
 
-
-// COME BACK TO THIS LATER
-function hasSamePair(object_1) {
-  // for(var i = 0; i < Object.keys(object_1).length; i++){
-  //   if object_1[i]
-  // }
-
-  for (var key in object_1) {
-    if (object_1.hasOwnProperty(key)) {
-      console.log(key);
-      console.log(object_1[key]);
-      // console.log(key + " -> " + object_1[key]);
+// RELEASE 1
+// create function
+// cycle through all values
+// if at any time the object has two values that are the same, return true, else at end of code, return false
+function hasSamePair(object_1, object_2){
+  for (var key_i in object_1){
+    for (var key_j in object_2){
+      
+      if ((key_j == key_i) && (object_1[key_i] == object_2[key_j])) {
+          return true;
+      }
     }
   }
-  
-  // console.log(Object.keys(object_1).length);
+  return false;
 }
-// console.log(hasSamePair({
-//   name: "Matthew",
-//   age: 35
-// }));
+console.log(hasSamePair(
+  {name: "Matthew", email: "mcataloe@gmail.com"},
+  {name: "Jenna", email: "jcataldi14@gmail.com"}
+  ));
 
-
+// RELEASE 2
+// function generates a word based on user preference with number of letters
+// Math.random to generate random number, multiply it by 26 and add 1, then round it down to the nearest integer
+// add new letter to variable that will hold all subsequent letters and return new generated word at end
 function generateWord(number_of_letters){
   var new_position = 0;
   var new_word = "";
@@ -60,6 +58,9 @@ function generateWord(number_of_letters){
 }
 
 
+// generates a random array of words by using the rand() function in the Math static class
+// stores these words in an initialized blank array and then returns them when done
+// utilizes the code used beforehand via separation of concerns
 function generateRandomWordArray(number_of_words){
   var array = [];
   
@@ -69,5 +70,4 @@ function generateRandomWordArray(number_of_words){
   
   return array;
 }
-
-console.log(generateRandomWordArray(10));
+console.log(findLongestPhrase(generateRandomWordArray(10)));
