@@ -1,5 +1,4 @@
 # OPERATION KITTEN EXPLOSION!
-
 # talk about Object Relational Mapping (ORM)
 
 # require gems
@@ -16,7 +15,7 @@ create_table_cmd = <<-SQL
     id INTEGER PRIMARY KEY,
     name VARCHAR(255),
     age INT
-  )
+  );
 SQL
 
 # create a kittens table (if it's not there already)
