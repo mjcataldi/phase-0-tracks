@@ -1,0 +1,34 @@
+RELEASE 2
+QUESTION 2.1 - Join two tables
+select * from reviews r inner join users u on u.id = r.user_id;
+
+|3|Was just meh|1|3|3|Angela Jolie
+|5|Was amazing!|3|5|5|Holly Berry
+|4|Was pretty dang good.|2|4|4|Steven Wonder
+
+QUESTION 2.2 - Join three tables
+select * from reviews r inner join users u on u.id = r.user_id
+  inner join businesses b on b.id = r.business_id;
+
+RESULTS
+|3|Was just meh|1|3|3|Angela Jolie|1|Grundy Hollow Wedding Chapel
+|5|Was amazing!|3|5|5|Holly Berry|3|The Beagle Nightclub
+|4|Was pretty dang good.|2|4|4|Steven Wonder|2|Amir's Towing
+
+QUESTION 3
+select u.name as user_name, b.name as business_name, r.stars, r.comments
+from reviews r inner join users u on u.id = r.user_id inner join businesses b on b.id = r.business_id;
+
+RESULTS
+Angela Jolie|Grundy Hollow Wedding Chapel|3|Was just meh
+Holly Berry|The Beagle Nightclub|5|Was amazing!
+Steven Wonder|Amir's Towing|4|Was pretty dang good.
+
+QUESTION 4
+ANSWER: Insert a where clause
+
+select * from reviews r inner join businesses b on b.id = r.business_id inner join users u on u.id = r.user_id
+where b.id = 2;
+
+RESULTS
+|4|Was pretty dang good.|2|4|2|Amir's Towing|4|Steven Wonder
