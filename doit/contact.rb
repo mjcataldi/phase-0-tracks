@@ -1,20 +1,20 @@
+require 'date'
+require_relative 'item'
+
 class Contact
   attr_accessor :first_name, :last_name, :email
   attr_reader :id, :db, :list
   
   def initialize(first_name, last_name, email)
     @db = SQLite3::Database.new("doit.db")
-    @db.results_as_hash
-    
+
     @first_name = first_name.strip
     @last_name = last_name.strip
     @email = email.strip
     
-    CreateContact()
-    @list = @db.execute("select id, name, description, due_date from items where contact_id = ?", [contactId])
-    
     TableCheck()
     CreateContact()
+    @list = @db.execute("select id, name, description, due_date, complete_date from items where contact_id = ? order by due_date", [@id])
   end
   
   def TableCheck
@@ -29,6 +29,15 @@ class Contact
     @db.execute(create_table_cmd)
   end
   
+  def self.ContactId(email)
+    db = SQLite3::Database.new('doit.db')
+    sql_cmd = <<-SQL
+      select id from contacts where email = ?
+    SQL
+    return db.execute(sql_cmd, [email]).flatten[0]
+  end
+  
+  
   def CreateContact
     results = @db.execute("select id from contacts where email = ?", @email)
     
@@ -41,10 +50,16 @@ class Contact
   
   def ListItems
     myString = ""
-    @list.each do |item|
-      myString += "#{item[0]}\t#{item[1]}\t#{item[2]}\t#{item[3]}"
+
+    if !@list.empty?
+      @list.each do |item|
+        myString += "#{item[0]}\t#{item[1]} - #{item[2]}\t#{item[3]}\t#{item[4]}\n"
+      end
+    else
+      myString = "No items currently exists."
     end
-    myString
+    
+    return myString
   end
   
   
@@ -53,18 +68,18 @@ class Contact
     db.results_as_hash()
     myString = ""
     
-    results = db.execute("select id, name, description, due_date from items where contact_id = ?", [contactId])
+    results = db.execute("select id, name, description, due_date, complete_date from items where contact_id = ? order by due_date asc", [contactId])
     if !results.empty?
       counter = 1
       results.each do |result|
-        myString += "#{counter}. #{result[0]}\t#{result[1]}\t#{result[2]}\n"
+        myString += "#{counter}. (ID#: #{result[0]})\t#{result[1]}\t#{result[2]}\t#{result[3]}\t#{result[4]}\n"
         counter += 1
       end
     else
       myString += "Oh no, we need some things to do!"
     end
     
-    return myString
+    return "Here are a list of your current DoIt items:\n" + myString
   end
   
   def self.ContactInfo(email)
@@ -105,6 +120,14 @@ class Contact
     end
     new_results = db.execute("select id from contacts where email = ?", email).flatten!
     return new_results[0]
+  end
+  
+  def self.ContactPoints(contact_id)
+    db = SQLite3::Database.new("doit.db")
+    sum_of_score = db.execute("select sum(score) sum_of_score from items where contact_id = ?", [contact_id]).flatten[0].to_i
+    
+    puts "Your current score is #{sum_of_score}."
+    return sum_of_score
   end
   
 end
