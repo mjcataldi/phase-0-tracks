@@ -30,13 +30,13 @@ class Contact
   end
   
   def self.ContactId(email)
-    db = SQLite3::Database.new('doit.db')
+    db = SQLite3::Database.new("doit.db")
     sql_cmd = <<-SQL
       select id from contacts where email = ?
     SQL
-    return db.execute(sql_cmd, [email]).flatten[0]
+    result = db.execute(sql_cmd, [email]).flatten[0].to_i
+    return result
   end
-  
   
   def CreateContact
     results = @db.execute("select id from contacts where email = ?", @email)

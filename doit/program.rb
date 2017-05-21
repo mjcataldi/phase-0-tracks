@@ -2,6 +2,7 @@ require 'date'
 require 'sqlite3'
 require_relative 'contact'
 require_relative 'item'
+require_relative 'feedback'
 
 def UserInterface
   puts "Hello!  Let's get started."
@@ -38,7 +39,7 @@ def UserInterface
   puts ""
   
   while repeat
-    puts "\nWhat would you like to do today:\nPress '1' to add a new item\nPress '2' to mark item finished\nPress '3' to see sum of score\nPress '4' to exit."
+    puts "\nWhat would you like to do today:\nPress '1' to add a new item\nPress '2' to mark item finished\nPress '3' to see sum of score\nPress '4' to leave feedback\nPress '5' to exit."
     answer = gets.strip.to_i
     
     case answer
@@ -49,6 +50,8 @@ def UserInterface
       when 3
         Contact.ContactPoints(contact.id)
       when 4
+        Feedback.GiveFeedback(contact.id) 
+      when 5
         puts "See ya!"
         repeat = false
       else
