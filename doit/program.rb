@@ -30,27 +30,30 @@ def UserInterface
   end
   
   puts "Awesome, your name is #{first_name} #{last_name}. \nYour email is #{email} and your id is #{contact_id}."
-  contact = Contact.new(first_name, last_name, email)
+  contact = Contact.new(contact_id)
   puts ""
   
-  puts contact.ListItems
   repeat = true
-  puts ""
-  
+
   while repeat
-    puts "\nWhat would you like to do today:\nPress '1' to add a new item\nPress '2' to mark item finished\nPress '3' to see sum of score\nPress '4' to leave feedback\nPress '5' to exit."
+    puts contact.ListItems()
+    puts ""
+    
+    puts "What would you like to do today:\nPress '1' to add a new item\nPress '2' to mark item finished\nPress '3' to see sum of score\nPress '4' to leave feedback\nPress '5' to change viewing preferences (PENDING FUNCITON)\nPress '6' to exit."
     answer = gets.strip.to_i
     
     case answer
       when 1
-        DoItItem.InsertItemUser(contact.id)
+        Item.InsertItemUser(contact.id)
       when 2
-        DoItItem.MarkComplete(contact.id)
+        Item.MarkComplete(contact.id)
       when 3
         Contact.ContactPoints(contact.id)
       when 4
         Feedback.GiveFeedback(contact.id) 
       when 5
+        contact.ChangeView()
+      when 6
         puts "See ya!"
         repeat = false
       else

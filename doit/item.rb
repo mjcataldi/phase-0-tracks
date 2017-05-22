@@ -9,7 +9,7 @@ class Item
   def initialize(item_id)
     @db = SQLite3::Database.new("doit.db")
     cmd = <<-SQL
-      select id, name, description, due_date, complete_date, contact_id
+      select id, name, description, due_date, complete_date, contact_id, score
       from items
       where id = ?
     SQL
@@ -37,24 +37,22 @@ class Item
     
   def self.MarkComplete(contact_id)
     db = SQLite3::Database.new("doit.db")
-    
     Contact.ListItems(contact_id)
     
     puts "What item do you want to mark complete (enter the ID#):"
     item_id = gets.strip.to_i
     
     due_date = Date.parse(db.execute("select due_date from items where id = ?", [item_id])[0][0])
-    score = due_date - Date.today 
-    
+    score = (due_date - Date.today).to_s[0].to_i
     due_date = due_date.to_s
-    score = score.to_i.to_s
-    
+
     db.execute("update items set complete_date = ?, score = ? where id = ?", [Date.today.to_s, score, item_id])
-    puts "Done!"
-    puts ""
+    puts "Done!\n"
   end
   
   def self.InsertItemUser(contactId)
+    contact = Contact.new(contactId)
+    
     puts "What is the item you'd like to add:"
     name = gets.strip
     
@@ -62,8 +60,6 @@ class Item
     description = gets.strip
 
     Item.InsertItem(name, description, contactId)
-    puts "\nHere is your list of items:"
-    puts Contact.ListItems(contactId)
   end
   
   def self.InsertItem(name, description, contact_id)
@@ -76,7 +72,13 @@ class Item
   
   def self.ItemFinished(id)
     db = SQLite3::Database.new("doit.db")
-    db.execute("update items set complete_date = ? where id = ?", [Date.Now, id])
+    cmd = <<-SQL
+      select due_date from items where id = ?
+    SQL
+    due_date = db.execute(cmd, [id]).flatten[0]
+    score = (Date.today - due_date).to_s[0]
+    
+    db.execute("update items set complete_date = ?, score = ? where id = ?", [Date.today, score, id])
   end
   
   private 
@@ -89,9 +91,11 @@ class Item
         description varchar(255),
         due_date datetime not null,
         complete_date datetime,
-        contact_id int not null
+        contact_id int not null,
+        score int
       );
     SQL
     db.execute(create_table_cmd)
   end
+  
 end
