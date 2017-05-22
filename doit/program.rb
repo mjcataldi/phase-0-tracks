@@ -1,5 +1,4 @@
 require 'date'
-require 'sqlite3'
 require_relative 'contact'
 require_relative 'item'
 require_relative 'feedback'

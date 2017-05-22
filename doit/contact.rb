@@ -1,20 +1,42 @@
 require 'date'
+require 'sqlite3'
 require_relative 'item'
 
 class Contact
   attr_accessor :first_name, :last_name, :email
-  attr_reader :id, :db, :list
+  attr_reader :id, :db, :items
   
-  def initialize(first_name, last_name, email)
+  def initialize(email)
     @db = SQLite3::Database.new("doit.db")
-
-    @first_name = first_name.strip
-    @last_name = last_name.strip
-    @email = email.strip
-    
     TableCheck()
-    CreateContact()
-    @list = @db.execute("select id, name, description, due_date, complete_date from items where contact_id = ? order by due_date", [@id])
+    cmd = <<-SQL
+      select id, first_name, last_name, email from contacts where email = ?
+    SQL
+    @email = email
+    contact_array = @db.execute(cmd, [email]).flatten
+    
+    if contact_array.empty?
+      puts "Hmm, looks like we don't have that email on record.  Let's sign up!"
+      
+      # Create Contact in self so don't have to do with new object creator
+      CreateContact()
+    else
+      @id = contact_array[0]
+      @first_name = contact_array[1]
+      @last_name = contact_array[2]
+      @email = contact_array[3]
+    end
+    
+    # create an array of list objects
+    cmd = <<-SQL
+      select id from items where contact_id = ?
+    SQL
+    
+    list_array = @db.execute(cmd, [@id]).flatten
+    @items = []
+    list_array.each do |item|
+      @items.push(Item.new(item))
+    end
   end
   
   def TableCheck
@@ -39,20 +61,27 @@ class Contact
   end
   
   def CreateContact
-    results = @db.execute("select id from contacts where email = ?", @email)
+    puts "What is your first name?"
+    @first_name = gets.strip.capitalize
+      
+    puts "What's your last name?"
+    @last_name = gets.strip.capitalize
     
-    if results.empty?
-      @db.execute("insert into contacts (first_name, last_name, email) values (?, ?, ?)", [@first_name, @last_name, @email])
-    end
-    new_results = @db.execute("select id from contacts where email = ?", @email).flatten!
-    @id = new_results[0].to_i
+    cmd = <<-SQL
+      insert into contacts (first_name, last_name, email) values (?, ?, ?)
+    SQL
+     
+    @db.execute(cmd, [@first_name, @last_name, @email])
+    @id = Contact.ContactId(@email)
+    
+    puts "Ok, you're signed up!"
   end
   
   def ListItems
     myString = ""
 
-    if !@list.empty?
-      @list.each do |item|
+    if !@items.empty?
+      @items.each do |item|
         myString += "#{item[0]}\t#{item[1]} - #{item[2]}\t#{item[3]}\t#{item[4]}\n"
       end
     else
@@ -65,15 +94,27 @@ class Contact
   
   def self.ListItems(contactId)
     db = SQLite3::Database.new("doit.db")
-    db.results_as_hash()
     myString = ""
     
     results = db.execute("select id, name, description, due_date, complete_date from items where contact_id = ? order by due_date asc", [contactId])
     if !results.empty?
-      counter = 1
+      space_length = 15
+      myString = "
+        #{Contact.PhraseLength('ID', space_length)}
+        #{Contact.PhraseLength('Name', space_length)}
+        #{Contact.PhraseLength('Description', space_length)}
+        #{Contact.PhraseLength('Due Date', space_length)}
+        #{Contact.PhraseLength('Complete Date', space_length)}
+        \n"
+        
       results.each do |result|
-        myString += "#{counter}. (ID#: #{result[0]})\t#{result[1]}\t#{result[2]}\t#{result[3]}\t#{result[4]}\n"
-        counter += 1
+        myString += "
+          #{Contact.PhraseLength(result[0], space_length)}
+          #{Contact.PhraseLength(result[1], space_length)}
+          #{Contact.PhraseLength(result[2], space_length)}
+          #{Contact.PhraseLength(result[3], space_length)}
+          #{Contact.PhraseLength(result[4], space_length)}
+          \n"
       end
     else
       myString += "Oh no, we need some things to do!"
@@ -128,6 +169,18 @@ class Contact
     
     puts "Your current score is #{sum_of_score}."
     return sum_of_score
+  end
+
+  def self.PhraseLength(phrase, num_of_spaces)
+    if phrase.length >= (num_of_spaces - 3)
+      phrase[0..(num_of_spaces - 1)] + "..."
+    else
+      phrase_spaces = num_of_spaces - phrase.length
+      space_holder = ""
+      phrase_spaces.times { space_holder += " " }
+      phrase = phrase + space_holder
+    end
+    return phrase
   end
   
 end

@@ -1,6 +1,6 @@
 require_relative 'contact'
 require_relative 'item'
-require 'SQLite3'
+require 'sqlite3'
 
 class Feedback
   attr_accessor :giver_id, :receiver_id, :encouragement
@@ -32,7 +32,7 @@ class Feedback
     end
     
     Feedback.EnsureTable
-    db = SQLite3::Database.new('doit.db')
+    db = SQLite3::Database.new("doit.db")
     sql_cmd = <<-SQL
       insert into feedback(giver_id, receiver_id, feedback) values (?, ?, ?)
     SQL
@@ -41,10 +41,10 @@ class Feedback
   end
   
   def self.EnsureTable
-    db = SQLite3::Database.new('doit.db')
+    db = SQLite3::Database.new("doit.db")
     sql_cmd = <<-SQL
       create table if not exists feedback (
-        id int primary key,
+        id integer primary key,
         giver_id int not null references contact(id),
         receiver_id int not null references contact(id),
         feedback varchar(255) not null

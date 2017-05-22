@@ -1,18 +1,32 @@
 require 'date'
+require 'sqlite3'
 require_relative 'contact'
 
-class DoItItem
+class Item
   attr_accessor :name, :description, :complete_date, :contact_id
-  attr_reader :due_date, :id, :db
+  attr_reader :due_date, :id, :db, :score
 
-  def initialize(name, description, due, contact_id)
-    @name = name.strip
-    @description = description.strip
-    @due_date = due
-    @contact_id = contact_id
-    
+  def initialize(item_id)
     @db = SQLite3::Database.new("doit.db")
-    InsertItem(@db, @name, @description, @due_date, @contact_id)
+    cmd = <<-SQL
+      select id, name, description, due_date, complete_date, contact_id
+      from items
+      where id = ?
+    SQL
+    item_array = @db.execute(cmd, [item_id]).flatten
+    
+    if item_array.empty?
+      puts "Hmm, we don't have that on file."
+      exit
+    else
+      @id = item_array[0]
+      @name = item_array[1]
+      @description = item_array[2]
+      @due_date = item_array[3]
+      @complete_date = item_array[4]
+      @contact_id = item_array[5]
+      @score = item_array[6]
+    end
   end
   
   def MarkComplete()
@@ -47,7 +61,7 @@ class DoItItem
     puts "What is the description:"
     description = gets.strip
 
-    DoItItem.InsertItem(name, description, contactId)
+    Item.InsertItem(name, description, contactId)
     puts "\nHere is your list of items:"
     puts Contact.ListItems(contactId)
   end
