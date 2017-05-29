@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang='en-us'>
+  <head>
+    <title>Campuses</title>
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" type="text/css">
+    <link rel="stylesheet" href="styles.css" type="text/css">
+  </head>
+  <body>
+    <h1>Campuses</h1>
+    <p>Here are the campuses that are available</p>
+    <p>Click <a href="campuses/new">here</a> to add a campus</p>
+    
+    <div class="col-sm-6 col-sm-offset-3">
+    <table class="table table-hover table-condensed table-striped">
+      <tr>
+        <th>ID</th>
+        <th>Abv</th>
+        <th>Campus</th>
+      </tr>
+    <% @campuses.each do |campus| %>
+      <tr>
+        <th><%= campus['id'] %></th>
+        <th><%= campus['abv'] %></th>
+        <th><%= campus['name'] %></th>
+      </tr>
+    <% end %>
+    </table>
+    </div>
+  </body>
+  
+</html>

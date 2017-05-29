@@ -1,0 +1,33 @@
+<html>
+  <head>
+    <title>Student Management System</title>
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" type="text/css">
+    <link rel="stylesheet" href="styles.css" type="text/css">
+  </head>
+  <body>
+    <h1>Student Management System</h1>
+    <p>Welcome to the Student Management System</p>
+    <p>Click <a href="students/new">here</a> to create a new student.</p>
+    <p>Click <a href="campuses">here</a> to see a list of campuses.</p>
+    
+    <div class="col-sm-6 col-sm-offset-2">
+      <table class="table table-condensed table-striped table-hover">
+        <tr>
+          <th>ID</th>
+          <th>Name</th>
+          <th>Age</th>
+          <th>Campus</th>
+        </tr>
+      <% @students.each do |student| %>
+        <tr>
+          <td><%= student['id'] %></td>
+          <td><%= student['name'] %></td>
+          <td><%= student['age'] %></td>
+          <td><%= student['campus'] %></td>
+        </tr>
+      <% end %>
+      </table>
+    </div>
+  </body>
+</html>
+

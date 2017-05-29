@@ -1,9 +1,6 @@
 # require gems
 require 'sinatra'
-# require 'sinatra/reloader'
 require 'sqlite3'
-
-# shotgun --host 0.0.0.0 --port 8080 app.rb
 
 set :public_folder, File.dirname(__FILE__) + '/static'
 
@@ -18,11 +15,6 @@ end
 
 get '/students/new' do
   erb :new_student
-end
-
-get '/campus' do
-  @campuses = db.execute("select distinct campus from students order by campus;")
-  erb :campus
 end
 
 # create new students via
