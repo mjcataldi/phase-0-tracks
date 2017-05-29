@@ -3,6 +3,8 @@ require 'sinatra'
 require 'sinatra/reloader'
 require 'sqlite3'
 
+# shotgun --host 0.0.0.0 --port 8080 app.rb
+
 set :public_folder, File.dirname(__FILE__) + '/static'
 
 db = SQLite3::Database.new("students.db")
